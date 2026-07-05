@@ -1,0 +1,26 @@
+{
+  "js/ts.tsdk.path": "node_modules/typescript/lib",
+
+  "files.exclude": {
+    "**/node_modules/**": true,
+    "**/.next/**": true,
+    "**/.husky/_/**": true
+  },
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+
+  "chat.disableAIFeatures": true,
+
+  "tailwindCSS.classFunctions": ["cva", "cn"],
+  "reactSnippets.settings.importReactOnTop": false
+}

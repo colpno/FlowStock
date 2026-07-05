@@ -1,0 +1,59 @@
+/* Font sizes */
+@utility typo-headline-xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  font-family: var(--font-geist-sans);
+}
+
+@utility typo-headline-lg {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  font-family: var(--font-geist-sans);
+}
+
+@utility typo-headline-md {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 600;
+  font-family: var(--font-geist-sans);
+}
+
+@utility typo-body-md {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 400;
+  font-family: var(--font-geist-sans);
+}
+
+@utility typo-body-sm {
+  font-size: 0.8125rem;
+  line-height: 1.125rem;
+  font-weight: 400;
+  font-family: var(--font-geist-sans);
+}
+
+@utility typo-label-md {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  font-family: var(--font-jetbrains-mono);
+}
+
+@utility typo-label-sm {
+  font-size: 0.6875rem;
+  line-height: 0.875rem;
+  font-weight: 500;
+  font-family: var(--font-jetbrains-mono);
+}
+
+@utility typo-table-data {
+  font-size: 0.8125rem;
+  line-height: 1.25rem;
+  font-weight: 400;
+  font-family: var(--font-geist-sans);
+}
