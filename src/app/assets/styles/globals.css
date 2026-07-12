@@ -6,21 +6,10 @@
 @import "./themes.css";
 @import "./variables.css";
 @import "./utilities.css";
-@import "./animations.css";
 
 @custom-variant dark (&:is(.dark *));
 
 @layer base {
-  html {
-    min-height: 100%;
-    @apply font-sans;
-  }
-
-  body {
-    min-height: 100%;
-    @apply bg-background font-sans text-foreground antialiased;
-  }
-
   * {
     outline: none;
   }
@@ -70,15 +59,7 @@
     @apply bg-primary-container text-on-primary-container;
   }
 
-  /* Drawer transition */
-  .drawer-transition {
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  /* Shimmer animation */
-  .shimmer {
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    background-size: 200% 100%;
-    animation: shimmer 2s infinite;
+  button {
+    @apply cursor-pointer;
   }
 }
