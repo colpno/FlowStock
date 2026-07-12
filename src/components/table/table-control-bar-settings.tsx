@@ -21,7 +21,7 @@ import {
 const pageSizes: number[] = [10, 25, 50, 75, 100];
 
 export type TableControlBarSettingsProps<TData extends string> = {
-  hidableColumns?: Record<TData, string>;
+  hidableColumns?: Partial<Record<TData, string>>;
   hiddenColumns?: TData[];
   sortable?: boolean;
   resizable?: boolean;
@@ -48,7 +48,7 @@ export default function TableControlBarSettings<TData extends string>({
     <DropdownMenu>
       <DropdownMenuTrigger render={<Button variant="outline" size="sm" />}>
         <MaterialIcon size={18}>settings</MaterialIcon>
-        Settings
+        Table settings
       </DropdownMenuTrigger>
       <DropdownMenuContent className="min-w-40">
         <DropdownMenuGroup>

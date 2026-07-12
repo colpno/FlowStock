@@ -2,14 +2,24 @@ import { create, type StateCreator, useStore as useZustandStore } from "zustand"
 import { createJSONStorage, persist, type PersistOptions } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 
+import { inventorySlice, type InventoryStore } from "./use-inventory-store";
+import { salesOrdersSlice, type SalesOrdersStore } from "./use-sales-orders-store";
 import { sidebarSlice, type SidebarStore } from "./use-sidebar-store";
 
 export type ImmerStateCreator<T> = StateCreator<Store, [["zustand/immer", never], never], [], T>;
 
-export type Store = SidebarStore;
+export type Store = SidebarStore & InventoryStore & SalesOrdersStore;
 
 type PersistedStore = {
   sidebar: Pick<Store["sidebar"], "open">;
+  inventory: Pick<
+    Store["inventory"],
+    "hiddenTableColumns" | "isTableSortable" | "isTableResizable"
+  >;
+  salesOrders: Pick<
+    Store["salesOrders"],
+    "hiddenTableColumns" | "isTableSortable" | "isTableResizable"
+  >;
 };
 
 const persistOptions: PersistOptions<Store, PersistedStore> = {
@@ -17,6 +27,16 @@ const persistOptions: PersistOptions<Store, PersistedStore> = {
   partialize: (state) => ({
     sidebar: {
       open: state.sidebar.open,
+    },
+    inventory: {
+      hiddenTableColumns: state.inventory.hiddenTableColumns,
+      isTableSortable: state.inventory.isTableSortable,
+      isTableResizable: state.inventory.isTableResizable,
+    },
+    salesOrders: {
+      hiddenTableColumns: state.salesOrders.hiddenTableColumns,
+      isTableSortable: state.salesOrders.isTableSortable,
+      isTableResizable: state.salesOrders.isTableResizable,
     },
   }),
   storage: createJSONStorage(() => localStorage),
@@ -28,12 +48,22 @@ const persistOptions: PersistOptions<Store, PersistedStore> = {
         ...currentState.sidebar,
         ...storageState.sidebar,
       },
+      inventory: {
+        ...currentState.inventory,
+        ...storageState.inventory,
+      },
+      salesOrders: {
+        ...currentState.salesOrders,
+        ...storageState.salesOrders,
+      },
     };
   },
 };
 
 const rootSlice: ImmerStateCreator<Store> = (...parameters) => ({
   ...sidebarSlice(...parameters),
+  ...inventorySlice(...parameters),
+  ...salesOrdersSlice(...parameters),
 });
 
 export const store = create<Store>()(persist(immer(rootSlice), persistOptions));

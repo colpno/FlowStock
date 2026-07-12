@@ -25,6 +25,8 @@ export type TableProps<TData extends RowData> = {
   hiddenColumns?: Array<keyof TData>;
   sortable?: boolean;
   resizable?: boolean;
+  emptyMessage?: string;
+  pagination?: boolean;
 } & Pick<TableOptions<TData>, "columns" | "data">;
 
 export default function Table<TData extends RowData>({
@@ -33,6 +35,8 @@ export default function Table<TData extends RowData>({
   hiddenColumns = [],
   sortable = false,
   resizable = false,
+  emptyMessage = "No results found.",
+  pagination = true,
 }: TableProps<TData>) {
   const { handlePageChange, pageSize, page } = usePageParam({
     page: 1,
@@ -76,46 +80,50 @@ export default function Table<TData extends RowData>({
                 {headerGroup.headers.map((header) => (
                   <th
                     key={header.id}
-                    className={cn(
-                      "relative space-x-0.5 px-4 py-3 typo-label-sm font-bold tracking-wider text-on-surface-variant uppercase",
-                      header.column.columnDef.meta?.align === "right" && "text-right",
-                      header.column.columnDef.meta?.align === "center" && "text-center"
-                    )}
-                    style={{ width: `${header.column.getSize()}px` }}
+                    className="relative space-x-0.5 px-4 py-3 typo-label-sm font-bold tracking-wider text-on-surface-variant uppercase"
                   >
-                    {flexRender(header.column.columnDef.header, header.getContext())}
+                    <div
+                      className={cn(
+                        "flex items-center justify-start",
+                        header.column.columnDef.meta?.align === "right" && "justify-end",
+                        header.column.columnDef.meta?.align === "center" && "justify-center"
+                      )}
+                      style={{ width: `${header.column.getSize()}px` }}
+                    >
+                      {flexRender(header.column.columnDef.header, header.getContext())}
 
-                    {/* Sort handler */}
-                    {sortable && header.column.columnDef.enableSorting && (
-                      <div className="inline-flex size-6 items-center justify-center">
-                        {header.column.getIsSorted() === "asc" ? (
-                          <button onClick={header.column.getToggleSortingHandler()}>
-                            <MaterialIcon>arrow_drop_up</MaterialIcon>
-                          </button>
-                        ) : header.column.getIsSorted() === "desc" ? (
-                          <button onClick={header.column.getToggleSortingHandler()}>
-                            <MaterialIcon>arrow_drop_down</MaterialIcon>
-                          </button>
-                        ) : (
-                          <button onClick={header.column.getToggleSortingHandler()}>
-                            <MaterialIcon size={18}>swap_vert</MaterialIcon>
-                          </button>
-                        )}
-                      </div>
-                    )}
+                      {/* Sort handler */}
+                      {sortable && header.column.columnDef.enableSorting && (
+                        <div className="inline-flex size-6 items-center justify-center">
+                          {header.column.getIsSorted() === "asc" ? (
+                            <button onClick={header.column.getToggleSortingHandler()}>
+                              <MaterialIcon>arrow_drop_up</MaterialIcon>
+                            </button>
+                          ) : header.column.getIsSorted() === "desc" ? (
+                            <button onClick={header.column.getToggleSortingHandler()}>
+                              <MaterialIcon>arrow_drop_down</MaterialIcon>
+                            </button>
+                          ) : (
+                            <button onClick={header.column.getToggleSortingHandler()}>
+                              <MaterialIcon size={18}>swap_vert</MaterialIcon>
+                            </button>
+                          )}
+                        </div>
+                      )}
 
-                    {/* Resize handler */}
-                    {resizable && header.column.columnDef.enableResizing && (
-                      <button
-                        type="button"
-                        onMouseDown={header.getResizeHandler()}
-                        onTouchStart={header.getResizeHandler()}
-                        className={cn(
-                          "absolute inset-y-0 right-0 w-1 cursor-col-resize bg-surface-container-high",
-                          header.column.getIsResizing() && "bg-primary"
-                        )}
-                      />
-                    )}
+                      {/* Resize handler */}
+                      {resizable && header.column.columnDef.enableResizing && (
+                        <button
+                          type="button"
+                          onMouseDown={header.getResizeHandler()}
+                          onTouchStart={header.getResizeHandler()}
+                          className={cn(
+                            "absolute inset-y-0 right-0 w-1 cursor-col-resize bg-surface-container-high",
+                            header.column.getIsResizing() && "bg-primary"
+                          )}
+                        />
+                      )}
+                    </div>
                   </th>
                 ))}
               </tr>
@@ -138,15 +146,23 @@ export default function Table<TData extends RowData>({
                       cell.column.columnDef.meta?.align === "center" && "text-center"
                     )}
                   >
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    <div style={{ width: `${cell.column.getSize()}px` }}>
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    </div>
                   </td>
                 ))}
               </tr>
             ))}
           </tbody>
         </table>
+      </div>
 
-        {/* Pagination */}
+      {table.getRowModel().rows.length <= 0 && (
+        <div className="py-4 text-center typo-table-data">{emptyMessage}</div>
+      )}
+
+      {/* Pagination */}
+      {pagination && (
         <PaginationProvider
           value={{ page, pageSize, totalItems, pageCount, onPageChange: handlePageChange }}
         >
@@ -157,7 +173,7 @@ export default function Table<TData extends RowData>({
             <PaginationMobile className="md:hidden" />
           </div>
         </PaginationProvider>
-      </div>
+      )}
     </div>
   );
 }
