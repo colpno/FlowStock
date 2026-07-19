@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 
 import { Geist, Inter, JetBrains_Mono } from "next/font/google";
 
+import { AppSidebar } from "@/components/app-sidebar";
+import { Header } from "@/components/header";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
@@ -33,7 +35,11 @@ export default function RootLayout({
     <html lang="en" className={cn(geistSans.variable, jetBrainsMono.variable, inter.variable)}>
       <body className="min-h-full bg-surface text-on-surface antialiased">
         <SidebarProvider defaultOpen={false}>
-          <TooltipProvider>{children}</TooltipProvider>
+          <TooltipProvider>
+            <AppSidebar />
+            <Header />
+            {children}
+          </TooltipProvider>
         </SidebarProvider>
       </body>
     </html>

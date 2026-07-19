@@ -1,8 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import React from "react";
 
+import { ROUTES } from "@/constants/route";
 import { cn } from "@/lib/utils";
 
 import { MaterialIcon } from "./material-icon";
@@ -20,7 +22,6 @@ import {
 } from "./ui/sidebar";
 
 type SidebarProps = {
-  activeTab?: string;
   user?: {
     name: string;
     role: string;
@@ -29,24 +30,16 @@ type SidebarProps = {
   children?: React.ReactNode;
 };
 
-const NAVIGATION_ITEMS = [
-  { href: "/dashboard", icon: "dashboard", label: "Dashboard" },
-  { href: "/inventory", icon: "inventory_2", label: "Inventory" },
-  { href: "/customer-orders", icon: "shopping_cart", label: "Orders" },
-  { href: "/users", icon: "group", label: "User Management" },
-  { href: "/roles-permissions", icon: "verified_user", label: "Roles & Permissions" },
-  { href: "/audit-logs", icon: "history", label: "Audit Logs" },
-  { href: "/settings", icon: "settings", label: "Settings" },
-];
+const NAVIGATION_ITEMS = Object.values(ROUTES).filter((route) => route.href !== ROUTES.home.href);
 
 export function AppSidebar({
-  activeTab = "/dashboard",
   user = {
     name: "Alex Morgan",
     role: "SUPER ADMIN",
   },
 }: SidebarProps) {
   const { open, isMobile } = useSidebar();
+  const pathname = usePathname();
 
   return (
     <Sidebar
@@ -58,7 +51,11 @@ export function AppSidebar({
       }
     >
       <SidebarHeader className="mb-2">
-        <SidebarMenuButton tooltip="Home" className="h-12" render={<Link href="/" />}>
+        <SidebarMenuButton
+          tooltip="Home"
+          className="h-12"
+          render={<Link href={ROUTES.home.href} />}
+        >
           {!open && <MaterialIcon>home</MaterialIcon>}
           <div className="h-full">
             <h1 className="typo-headline-md font-semibold tracking-tight text-on-surface">
@@ -81,7 +78,7 @@ export function AppSidebar({
                       href={item.href}
                       className={cn(
                         "flex items-center gap-3 rounded-lg px-3 py-5 typo-body-md transition-colors",
-                        activeTab === item.href
+                        pathname === item.href
                           ? "bg-secondary-container font-semibold text-on-secondary-container active:scale-[0.98]"
                           : "text-on-surface-variant hover:bg-surface-container-high"
                       )}

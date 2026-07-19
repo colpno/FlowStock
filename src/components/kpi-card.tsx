@@ -1,5 +1,6 @@
 "use client";
 
+import { COLOR_SETS } from "@/constants/colors";
 import { cn } from "@/lib/utils";
 
 import { MaterialIcon } from "./material-icon";
@@ -15,22 +16,22 @@ type KPICardProps = {
 
 const statusStyles = {
   normal: {
-    textIcon: "text-primary",
-    textChange: "text-on-surface-variant",
+    icon: COLOR_SETS.INFO.text,
+    change: COLOR_SETS.INFO.text,
   },
   success: {
-    textIcon: "text-primary",
-    textChange: "text-success",
+    icon: COLOR_SETS.INFO.text,
+    change: COLOR_SETS.SUCCESS.text,
   },
   warning: {
-    textIcon: "text-warning",
-    textChange: "text-warning",
+    icon: COLOR_SETS.WARNING.text,
+    change: COLOR_SETS.WARNING.text,
   },
   critical: {
-    textIcon: "text-error",
-    textChange: "text-error font-bold animate-pulse",
+    icon: COLOR_SETS.DANGER.text,
+    change: `${COLOR_SETS.DANGER.text} font-bold animate-pulse`,
   },
-};
+} as const;
 
 export function KPICard({ icon, label, value, change, status = "normal", children }: KPICardProps) {
   const styles = statusStyles[status];
@@ -48,12 +49,12 @@ export function KPICard({ icon, label, value, change, status = "normal", childre
         <span
           className={cn(
             "mb-1 typo-label-sm tracking-wider uppercase",
-            status === "critical" ? "font-semibold text-on-error-container" : "text-outline"
+            status === "critical" ? `font-semibold ${COLOR_SETS.DANGER.text}` : "text-outline"
           )}
         >
           {label}
         </span>
-        <div className={`rounded-lg ${styles.textIcon}`}>
+        <div className={`rounded-lg ${styles.icon}`}>
           <MaterialIcon>{icon}</MaterialIcon>
         </div>
       </div>
@@ -63,7 +64,7 @@ export function KPICard({ icon, label, value, change, status = "normal", childre
           <h3
             className={cn(
               status === "critical"
-                ? "typo-headline-lg font-extrabold text-error"
+                ? `typo-headline-lg font-extrabold ${COLOR_SETS.DANGER.text}`
                 : "typo-headline-lg font-bold"
             )}
           >
@@ -77,7 +78,7 @@ export function KPICard({ icon, label, value, change, status = "normal", childre
       )}
 
       {change && (
-        <span className={`mt-2 flex items-center gap-1 typo-label-md ${styles.textChange}`}>
+        <span className={`mt-2 flex items-center gap-1 typo-label-md ${styles.change}`}>
           {change}
         </span>
       )}
