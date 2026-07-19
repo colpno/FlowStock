@@ -157,5 +157,5 @@ export const useSalesOrdersTable = () => {
     [columnHelper]
   );
 
-  return { columns, editData, setEditData, openDialog, setOpenDialog };
+  return { columns, editData, openDialog, setOpenDialog };
 };

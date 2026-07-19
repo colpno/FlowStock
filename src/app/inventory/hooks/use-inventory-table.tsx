@@ -42,7 +42,7 @@ export const useInventoryTable = () => {
         enableHiding: true,
         cell: (props) => (
           <div>
-            <p className="typo-body-md">{props.row.original.product_name}</p>
+            <p className="typo-table-data">{props.row.original.product_name}</p>
             <p className="typo-label-sm text-muted">SKU: {props.row.original.product_sku}</p>
           </div>
         ),
@@ -54,7 +54,7 @@ export const useInventoryTable = () => {
         enableColumnFilter: true,
         enableSorting: true,
         enableHiding: true,
-        cell: (props) => <p className="typo-body-md">{props.row.original.warehouse_name}</p>,
+        cell: (props) => <p className="typo-table-data">{props.row.original.warehouse_name}</p>,
       }),
       columnHelper.display({
         header: "Status",
@@ -172,5 +172,5 @@ export const useInventoryTable = () => {
     [columnHelper]
   );
 
-  return { columns, editData, setEditData, openDialog, setOpenDialog };
+  return { columns, editData, openDialog, setOpenDialog };
 };

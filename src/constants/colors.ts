@@ -20,7 +20,7 @@ export const COLOR_SETS = {
   DANGER: {
     border: "border-red-200",
     background: "bg-red-100",
-    text: "text-red-600",
-    dot: "bg-red-600",
+    text: "text-red-700",
+    dot: "bg-red-700",
   },
 } as const;

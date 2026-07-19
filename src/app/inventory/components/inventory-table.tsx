@@ -40,13 +40,17 @@ const data: InventoryTableDef[] = faker.helpers.multiple(
   { count: 23 }
 );
 
-const schema = z.any();
+const updateSchema = z.any();
 
 export default function InventoryTable() {
   const isTableSortable = useStore((state) => state.inventory.isTableSortable);
   const isTableResizable = useStore((state) => state.inventory.isTableResizable);
   const hiddenTableColumns = useStore((state) => state.inventory.hiddenTableColumns);
-  const { columns, openDialog, setOpenDialog, editData, setEditData } = useInventoryTable();
+  const { columns, openDialog, setOpenDialog, editData } = useInventoryTable();
+
+  const handleUpdate = (formData: z.infer<typeof updateSchema>) => {
+    console.log(formData);
+  };
 
   return (
     <>
@@ -67,8 +71,8 @@ export default function InventoryTable() {
             <DialogTitle>Edit Item</DialogTitle>
           </DialogHeader>
           <InventoryForm
-            schema={schema}
-            onSubmit={setEditData}
+            schema={updateSchema}
+            onSubmit={handleUpdate}
             defaultValues={editData || undefined}
           />
         </DialogContent>
