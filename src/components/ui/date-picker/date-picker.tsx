@@ -30,20 +30,11 @@ function DatePicker<TMode extends Mode = "single">({
     }
   };
 
-  const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "ArrowDown") {
-      e.preventDefault();
-      setOpen(true);
-    }
-    props.onKeyDown?.(e);
-  };
-
   const handleCalendarSelect = (date: Date | Date[] | DateRange | undefined) => {
     if (date) {
       onChange?.(date as DatePickerValue<TMode>);
     }
     setValue(formatDate(date));
-    setOpen(false);
   };
 
   return (
@@ -52,7 +43,6 @@ function DatePicker<TMode extends Mode = "single">({
         {...props}
         value={value}
         onChange={handleInputChange}
-        onKeyDown={handleInputKeyDown}
         autoComplete="off"
         className="pr-10"
       />
