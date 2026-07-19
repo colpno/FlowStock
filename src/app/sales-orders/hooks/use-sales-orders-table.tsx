@@ -43,17 +43,9 @@ export const useSalesOrdersTable = () => {
 
   const columns = useMemo(
     () => [
-      columnHelper.accessor("document_id", {
-        header: "Document Id",
-        size: 150,
-        enableResizing: true,
-        enableColumnFilter: true,
-        enableSorting: true,
-        enableHiding: true,
-      }),
-      columnHelper.accessor("customer_name", {
-        header: "Customer",
-        size: 250,
+      columnHelper.accessor("order_no", {
+        header: "Order",
+        size: 200,
         enableResizing: true,
         enableColumnFilter: true,
         enableSorting: true,
@@ -61,7 +53,7 @@ export const useSalesOrdersTable = () => {
       }),
       columnHelper.accessor("status", {
         header: "Status",
-        size: 150,
+        size: 100,
         enableResizing: true,
         enableColumnFilter: true,
         enableSorting: true,
@@ -82,6 +74,36 @@ export const useSalesOrdersTable = () => {
             </div>
           );
         },
+      }),
+      columnHelper.accessor("customer_id", {
+        header: "Customer",
+        size: 200,
+        enableResizing: true,
+        enableColumnFilter: true,
+        enableSorting: true,
+        enableHiding: true,
+        cell: (props) => (
+          <div className="typo-table-data">
+            <p>{props.row.original.customer_name}</p>
+            <p className="typo-body-sm text-muted">{props.row.original.customer_phone}</p>
+          </div>
+        ),
+      }),
+      columnHelper.accessor("shipping_address", {
+        header: "Shipping Address",
+        size: 300,
+        enableResizing: true,
+        enableColumnFilter: true,
+        enableSorting: true,
+        enableHiding: true,
+      }),
+      columnHelper.accessor("courier_no", {
+        header: "Courier No",
+        size: 200,
+        enableResizing: true,
+        enableColumnFilter: true,
+        enableSorting: true,
+        enableHiding: true,
       }),
       columnHelper.accessor("created_at", {
         header: "Created At",

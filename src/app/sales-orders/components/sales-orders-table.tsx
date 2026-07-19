@@ -1,28 +1,20 @@
 "use client";
 
-import type { Customer, OrderStatus, SalesOrder } from "@/types/data";
+import type { OrderStatus, SalesOrder } from "@/types/data";
 
 import { faker } from "@faker-js/faker";
 
 import Table from "@/components/table/table";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { getCustomer, getSalesOrder } from "@/lib/data";
+import { getSalesOrder } from "@/lib/data";
 import { useStore } from "@/stores/use-store";
 
 import { useSalesOrdersTable } from "../hooks/use-sales-orders-table";
 import SalesOrdersStatusEditor from "./sales-orders-status-editor";
 
-export type SalesOrdersTableDef = {
-  customer_name: Customer["name"];
-} & SalesOrder;
+export type SalesOrdersTableDef = SalesOrder;
 
-const data: SalesOrdersTableDef[] = faker.helpers.multiple(
-  () => ({
-    ...getSalesOrder(),
-    customer_name: getCustomer().name,
-  }),
-  { count: 34 }
-);
+const data: SalesOrdersTableDef[] = faker.helpers.multiple(getSalesOrder, { count: 34 });
 
 export default function SalesOrdersTable() {
   const isTableSortable = useStore((state) => state.salesOrders.isTableSortable);

@@ -23,16 +23,18 @@ import SalesOrdersFilterForm from "../forms/sales-orders-filter-form";
 import SalesOrdersForm from "../forms/sales-orders-form";
 
 type HidableColumns = Omit<
-  Omit<Record<keyof SalesOrdersTableDef, string>, "customer_name"> &
+  Omit<Record<keyof SalesOrdersTableDef, string>, "customer_name" | "customer_phone"> &
     Omit<Record<keyof SalesOrderItemsTableDef, string>, "product_name" | "product_sku">,
   "id"
 >;
 
 const hidableColumns: HidableColumns = {
-  document_id: "Document Id",
+  order_no: "Order No",
   customer_id: "Customer",
+  shipping_address: "Shipping Address",
   status: "Status",
   courier_no: "Courier No",
+  order_id: "Order Id",
   product_id: "Product",
   quantity: "Quantity",
   price: "Price",

@@ -24,7 +24,7 @@ export const useSalesOrderItemsTable = () => {
 
   const columns = useMemo(
     () => [
-      columnHelper.accessor("product_name", {
+      columnHelper.accessor("product_id", {
         header: "Product",
         size: 250,
         enableResizing: true,
@@ -33,7 +33,7 @@ export const useSalesOrderItemsTable = () => {
         enableHiding: true,
         cell: (props) => (
           <div>
-            <p className="typo-body-md">{props.getValue()}</p>
+            <p className="typo-table-data">{props.row.original.product_name}</p>
             <p className="typo-label-sm text-muted">SKU: {props.row.original.product_sku}</p>
           </div>
         ),

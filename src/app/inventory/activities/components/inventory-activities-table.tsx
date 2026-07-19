@@ -1,9 +1,11 @@
-import type { Document, InventoryActivity, Product, Warehouse } from "@/types/data";
+"use client";
+
+import type { InventoryActivity, Product, User, Warehouse } from "@/types/data";
 
 import { faker } from "@faker-js/faker";
 
 import Table from "@/components/table/table";
-import { getDocument, getInventoryActivity, getProduct, getWarehouse } from "@/lib/data";
+import { getInventoryActivity, getProduct, getUser, getWarehouse } from "@/lib/data";
 
 import { useInventoryActivitiesTable } from "../hooks/use-inventory-activities-table";
 
@@ -11,7 +13,7 @@ export type InventoryActivitiesTableDef = {
   product_name: Product["name"];
   product_sku: Product["sku"];
   warehouse_name: Warehouse["name"];
-  document_type: Document["type"];
+  moved_by_name: User["full_name"];
 } & InventoryActivity;
 
 const data: InventoryActivitiesTableDef[] = faker.helpers.multiple(
@@ -20,7 +22,7 @@ const data: InventoryActivitiesTableDef[] = faker.helpers.multiple(
     product_name: getProduct().name,
     product_sku: getProduct().sku,
     warehouse_name: getWarehouse().name,
-    document_type: getDocument().type,
+    moved_by_name: getUser().full_name,
   }),
   { count: 23 }
 );

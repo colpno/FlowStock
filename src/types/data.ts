@@ -31,7 +31,7 @@ export type RolePermissions = {
 
 export type Product = {
   id: string;
-  category_id: string;
+  category_id: Category["id"];
   sku: string;
   name: string;
   created_at: string;
@@ -53,13 +53,6 @@ export type Warehouse = {
   updated_at: string;
 };
 
-export type Customer = {
-  id: string;
-  name: string;
-  created_at: string;
-  updated_at: string;
-};
-
 export type Supplier = {
   id: string;
   name: string;
@@ -69,8 +62,11 @@ export type Supplier = {
 
 export type SalesOrder = {
   id: string;
-  customer_id: string;
-  document_id: string;
+  order_no: string;
+  customer_id?: string;
+  customer_name: string;
+  customer_phone: string;
+  shipping_address: string;
   status: OrderStatus;
   courier_no?: string;
   created_at: string;
@@ -79,8 +75,8 @@ export type SalesOrder = {
 
 export type SalesOrderItem = {
   id: string;
-  sales_order_id: string;
-  product_id: string;
+  order_id: SalesOrder["id"];
+  product_id: Product["id"];
   quantity: number;
   price: number;
   currency_code: string;
@@ -90,8 +86,8 @@ export type SalesOrderItem = {
 
 export type PurchaseOrder = {
   id: string;
-  supplier_id: string;
-  document_id: string;
+  order_no: string;
+  supplier_id: Supplier["id"];
   status: OrderStatus;
   courier_no?: string;
   created_at: string;
@@ -100,10 +96,10 @@ export type PurchaseOrder = {
 
 export type PurchaseOrderItem = {
   id: string;
-  purchase_order_id: string;
-  product_id: string;
+  order_id: PurchaseOrder["id"];
+  product_id: Product["id"];
   quantity: number;
-  cost: string;
+  cost: number;
   /**
    * @example "VND"
    * @example "USD"
@@ -115,8 +111,8 @@ export type PurchaseOrderItem = {
 
 export type Inventory = {
   id: string;
-  warehouse_id: string;
-  product_id: string;
+  warehouse_id: Warehouse["id"];
+  product_id: Product["id"];
   /** The on-hand amount. */
   physical: number;
   /** The occupied amount. */
@@ -127,22 +123,18 @@ export type Inventory = {
 
 export type InventoryActivity = {
   id: string;
-  warehouse_id: string;
-  product_id: string;
-  document_id: string;
+  movement_no: string;
+  movement_type: "PURCHASE_RECEIPT" | "SHIPMENT" | "TRANSFER" | "ADJUSTMENT";
+  warehouse_id: Warehouse["id"];
+  product_id: Product["id"];
+  moved_by: User["id"];
+  old_quantity: number;
   /**
-   * @example "+100"
-   * @example "-20"
+   * @example 100
+   * @example -20
    */
-  change: string;
-  created_at: string;
-  updated_at: string;
-};
-
-export type Document = {
-  id: string;
-  document_id: string;
-  type: "PURCHASE_RECEIPT" | "SHIPMENT" | "TRANSFER" | "ADJUSTMENT";
+  change: number;
+  reason: string;
   created_at: string;
   updated_at: string;
 };
