@@ -1,3 +1,5 @@
+"use client";
+
 import type { InventoryTableDef } from "../components/inventory-table";
 
 import { createColumnHelper } from "@tanstack/react-table";

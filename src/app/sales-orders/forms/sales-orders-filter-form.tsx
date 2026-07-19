@@ -1,3 +1,5 @@
+"use client";
+
 import DatePickerField from "@/components/form-fields/date-picker-field/date-picker-field";
 import NumberField from "@/components/form-fields/number-field/number-field";
 import TextField from "@/components/form-fields/text-field/text-field";

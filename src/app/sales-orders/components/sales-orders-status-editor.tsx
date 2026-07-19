@@ -1,3 +1,5 @@
+"use client";
+
 import type { OrderStatus } from "@/types/data";
 
 import { useState } from "react";
@@ -8,7 +10,7 @@ import { ORDER_STATUSES } from "@/constants/common";
 import { toPascalCase } from "@/lib/utils";
 
 type Props = {
-  onSubmit: (status: OrderStatus) => void;
+  onSubmitAction: (status: OrderStatus) => void;
 };
 
 export default function SalesOrdersStatusEditor(props: Props) {
@@ -24,7 +26,7 @@ export default function SalesOrdersStatusEditor(props: Props) {
         ))}
       </ToggleGroup>
 
-      <Button onClick={() => value[0] && props.onSubmit(value[0])}>Change</Button>
+      <Button onClick={() => value[0] && props.onSubmitAction(value[0])}>Change</Button>
     </>
   );
 }

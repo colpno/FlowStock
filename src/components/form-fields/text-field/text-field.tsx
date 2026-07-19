@@ -13,7 +13,7 @@ export type TextFieldProps = {
   };
 } & Omit<InputProps, "id">;
 
-function TextField({ name, label, slotProps, ...props }: TextFieldProps) {
+export default function TextField({ name, label, slotProps, ...props }: TextFieldProps) {
   const { control } = useFormContext();
 
   return (
@@ -44,5 +44,3 @@ function TextField({ name, label, slotProps, ...props }: TextFieldProps) {
     />
   );
 }
-
-export default TextField;

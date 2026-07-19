@@ -1,3 +1,5 @@
+"use client";
+
 import type { SalesOrderItemsTableDef } from "./sales-order-items-table";
 import type { SalesOrdersTableDef } from "./sales-orders-table";
 import type { SalesTableName } from "@/stores/use-sales-orders-store";

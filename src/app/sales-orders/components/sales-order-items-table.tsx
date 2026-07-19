@@ -1,3 +1,5 @@
+"use client";
+
 import type { Product, SalesOrderItem } from "@/types/data";
 
 import { faker } from "@faker-js/faker";

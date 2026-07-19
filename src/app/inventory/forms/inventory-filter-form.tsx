@@ -1,3 +1,5 @@
+"use client";
+
 import ComboboxMultipleField from "@/components/form-fields/combobox/combobox-multiple-field";
 import RadioGroupField from "@/components/form-fields/radio-group/radio-group-field";
 import TextField from "@/components/form-fields/text-field/text-field";

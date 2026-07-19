@@ -1,3 +1,5 @@
+"use client";
+
 import type { Customer, OrderStatus, SalesOrder } from "@/types/data";
 
 import { faker } from "@faker-js/faker";
@@ -50,7 +52,7 @@ export default function SalesOrdersTable() {
           <DialogHeader>
             <DialogTitle>Status Editor</DialogTitle>
           </DialogHeader>
-          <SalesOrdersStatusEditor onSubmit={handleStatusChange} />
+          <SalesOrdersStatusEditor onSubmitAction={handleStatusChange} />
         </DialogContent>
       </Dialog>
     </>

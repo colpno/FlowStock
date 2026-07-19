@@ -17,10 +17,10 @@ type KPICardProps = {
 const statusStyles = {
   normal: {
     icon: COLOR_SETS.INFO.text,
-    change: COLOR_SETS.INFO.text,
+    change: "",
   },
   success: {
-    icon: COLOR_SETS.INFO.text,
+    icon: COLOR_SETS.SUCCESS.text,
     change: COLOR_SETS.SUCCESS.text,
   },
   warning: {
