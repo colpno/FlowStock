@@ -19,16 +19,34 @@ export default function InventoryActivitiesTableSkeleton() {
           <thead className="border-b border-outline-variant bg-surface-container-low">
             <tr>
               <th className="px-4 py-3 typo-label-sm font-bold tracking-wider text-on-surface-variant uppercase">
-                Product
+                Movement No
+              </th>
+              <th className="px-4 py-3 typo-label-sm font-bold tracking-wider text-on-surface-variant uppercase">
+                Type
+              </th>
+              <th className="px-4 py-3 typo-label-sm font-bold tracking-wider text-on-surface-variant uppercase">
+                By
               </th>
               <th className="px-4 py-3 typo-label-sm font-bold tracking-wider text-on-surface-variant uppercase">
                 Warehouse
               </th>
               <th className="px-4 py-3 typo-label-sm font-bold tracking-wider text-on-surface-variant uppercase">
+                Product
+              </th>
+              <th className="px-4 py-3 typo-label-sm font-bold tracking-wider text-on-surface-variant uppercase">
                 Change
               </th>
               <th className="px-4 py-3 typo-label-sm font-bold tracking-wider text-on-surface-variant uppercase">
-                Type
+                Old Quantity
+              </th>
+              <th className="px-4 py-3 typo-label-sm font-bold tracking-wider text-on-surface-variant uppercase">
+                Reason
+              </th>
+              <th className="px-4 py-3 typo-label-sm font-bold tracking-wider text-on-surface-variant uppercase">
+                Created At
+              </th>
+              <th className="px-4 py-3 typo-label-sm font-bold tracking-wider text-on-surface-variant uppercase">
+                Updated At
               </th>
             </tr>
           </thead>
@@ -38,6 +56,9 @@ export default function InventoryActivitiesTableSkeleton() {
                 key={`row-${i}`}
                 className="border-b border-outline-variant transition-colors *:px-4 *:py-3 hover:bg-surface-container-low"
               >
+                <td>
+                  <Skeleton className={cn("h-5", widths[0]![i % widths[i]!.length])} />
+                </td>
                 <td>
                   <Skeleton className={cn("h-5", widths[1]![i % widths[i]!.length])} />
                 </td>
@@ -49,6 +70,21 @@ export default function InventoryActivitiesTableSkeleton() {
                 </td>
                 <td>
                   <Skeleton className={cn("h-5", widths[4]![i % widths[i]!.length])} />
+                </td>
+                <td>
+                  <Skeleton className={cn("h-5", widths[5]![i % widths[i]!.length])} />
+                </td>
+                <td>
+                  <Skeleton className={cn("h-5", widths[6]![i % widths[i]!.length])} />
+                </td>
+                <td>
+                  <Skeleton className={cn("h-5", widths[7]![i % widths[i]!.length])} />
+                </td>
+                <td>
+                  <Skeleton className={cn("h-5", widths[8]![i % widths[i]!.length])} />
+                </td>
+                <td>
+                  <Skeleton className={cn("h-5", widths[9]![i % widths[i]!.length])} />
                 </td>
               </tr>
             ))}

@@ -2,13 +2,13 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 
 const widths = [
-  ["w-12", "w-14", "w-16", "w-18", "w-20"],
-  ["w-24", "w-32", "w-28", "w-36", "w-40"],
-  ["w-24", "w-32", "w-28", "w-36", "w-40"],
-  ["w-24", "w-32", "w-28", "w-36", "w-40"],
-  ["w-12", "w-14", "w-16", "w-18", "w-20"],
-  ["w-12", "w-14", "w-16", "w-18", "w-20"],
-  ["w-12", "w-14", "w-16", "w-18", "w-20"],
+  ["w-12", "w-14", "w-16", "w-18", "w-20", "w-23", "w-12"],
+  ["w-24", "w-32", "w-28", "w-36", "w-40", "w-23", "w-12"],
+  ["w-24", "w-32", "w-28", "w-36", "w-40", "w-31", "w-12"],
+  ["w-24", "w-32", "w-28", "w-36", "w-40", "w-18", "w-12"],
+  ["w-12", "w-14", "w-16", "w-18", "w-20", "w-23", "w-12"],
+  ["w-12", "w-14", "w-16", "w-18", "w-20", "w-15", "w-12"],
+  ["w-12", "w-14", "w-16", "w-18", "w-20", "w-23", "w-12"],
 ];
 
 export default function PurchaseOrdersTableSkeleton() {
@@ -19,19 +19,25 @@ export default function PurchaseOrdersTableSkeleton() {
           <thead className="border-b border-outline-variant bg-surface-container-low">
             <tr>
               <th className="px-4 py-3 typo-label-sm font-bold tracking-wider text-on-surface-variant uppercase">
-                Order ID
-              </th>
-              <th className="px-4 py-3 typo-label-sm font-bold tracking-wider text-on-surface-variant uppercase">
-                Customer
-              </th>
-              <th className="px-4 py-3 typo-label-sm font-bold tracking-wider text-on-surface-variant uppercase">
-                Amount
+                Order
               </th>
               <th className="px-4 py-3 typo-label-sm font-bold tracking-wider text-on-surface-variant uppercase">
                 Status
               </th>
               <th className="px-4 py-3 typo-label-sm font-bold tracking-wider text-on-surface-variant uppercase">
-                Date
+                Supplier
+              </th>
+              <th className="px-4 py-3 typo-label-sm font-bold tracking-wider text-on-surface-variant uppercase">
+                Courier No
+              </th>
+              <th className="px-4 py-3 typo-label-sm font-bold tracking-wider text-on-surface-variant uppercase">
+                Created At
+              </th>
+              <th className="px-4 py-3 typo-label-sm font-bold tracking-wider text-on-surface-variant uppercase">
+                Updated At
+              </th>
+              <th className="px-4 py-3 typo-label-sm font-bold tracking-wider text-on-surface-variant uppercase">
+                Actions
               </th>
             </tr>
           </thead>
@@ -55,6 +61,12 @@ export default function PurchaseOrdersTableSkeleton() {
                 </td>
                 <td>
                   <Skeleton className={cn("h-5", widths[4]![i % widths[i]!.length])} />
+                </td>
+                <td>
+                  <Skeleton className={cn("h-5", widths[5]![i % widths[i]!.length])} />
+                </td>
+                <td>
+                  <Skeleton className={cn("h-5", widths[6]![i % widths[i]!.length])} />
                 </td>
               </tr>
             ))}
